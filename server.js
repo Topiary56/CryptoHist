@@ -1,3 +1,6 @@
+// server.js
+//
+// desc: This is the express server for the crypto project.
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
