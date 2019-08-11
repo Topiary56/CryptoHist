@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+var fs = require('fs');
+const header = ('_id,key,exch1Name,exch2Name,timeStamp,ccyPair,exch1BuyAt,exch1SellAt,exch2BuyAt,exch2SellAt,gainLoss,urgentTrade,arbPercent,exch1BuyOrSell,tradeInstructions,time')
 
 // Item Model
 const Item = require('../../models/Item');
@@ -11,37 +13,32 @@ router.get('/', (req,res) =>{
     Item.find()
         .sort({time: -1 })
         .lean()
-        .limit(20)
+        .limit(100)
         .exec((err, docs) => {
             if(err){
                 return console.log(err);
             }
-            
+            var temp = outputFormattedResults(docs);
+            fs.writeFileSync('./cryptohist.csv', header + '\n' + temp , 'utf8');            
             res.send(docs);
-            
-            //console.log(docs);
         });
-        //.then(items=>res.json(items));
 });
+function outputFormattedResults(arr){
+    var result = "";
+    for (let i = 0; i < arr.length; i++){
+        result += i+1;
+        //console.log(i+1);
+        for (var key in arr[i]){
+            if(arr[i].hasOwnProperty(key)){
+                result += (arr[i][key] + ',');
 
-/* @route  POST api.Items
-// @desc   CREATE an Item
-// @access Public
-router.post('/', (req,res) =>{
-    const newItem = new Item({
-        name: req.body.name
-    });
-
-    newItem.save().then(item => res.json(item));
-});*/
-
-/* @route  DELETE api/Items/:id
-// @desc   Deleta an Item
-// @access Public
-router.delete('/:id', (req,res) =>{
-    Item.findById(req.params.id)
-        .then(item => item.remove().then(() => res.json({success: true})))
-        .catch(err => res.status(404).json({success: false}))
-});*/
+                //console.log(key + "= " + arr[i][key]);
+            }
+        }
+        result += ('\n');
+        //console.log(" ");
+    }
+    return result;
+}
 
 module.exports = router;

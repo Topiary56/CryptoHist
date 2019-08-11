@@ -20,7 +20,7 @@ class Shoppinglist extends Component{
         this.props.deleteItem(id);
     }
 
-    
+
 
     render() {
         const { items } = this.props.item;
@@ -29,17 +29,15 @@ class Shoppinglist extends Component{
             <Container>
                     <ListGroup>
                         <TransitionGroup className="shopping-list">
-                            
-                            {items.map(({ _id,key, exch1Name, exch2Name, timeStamp, ccyPair,exch1BuyAt , exch1SellAt, exch2BuyAt,exch2SellAt,
-                                gainLoss, urgentTrade,arbPercent , exch1BuyOrSell,tradeInstructions, time}) => (
+                            {items.map(({ _id, timeStamp, tradeInstructions, /*key, exch1Name, exch2Name, ccyPair,exch1BuyAt , exch1SellAt, exch2BuyAt,exch2SellAt,
+                                gainLoss, urgentTrade,arbPercent , exch1BuyOrSell, time*/}) => (
                                 <CSSTransition key={_id} timeout={500} classNames="fade">
                                     <ListGroupItem>
                                         {tradeInstructions}<br></br>
-                                        {timeStamp}<br></br>
+                                        {timeStamp}
                                         {/*{key}<br></br>
                                         {exch1Name}<br></br>
                                         {exch2Name}<br></br>
-                                        {timeStamp}<br></br>
                                         {ccyPair}<br></br>
                                         {exch1BuyAt}<br></br>
                                         {exch1SellAt}<br></br>
@@ -48,8 +46,7 @@ class Shoppinglist extends Component{
                                         {gainLoss}<br></br>
                                         {urgentTrade}<br></br>
                                         {arbPercent}<br></br>
-                                        {exch1BuyOrSell}<br></br>
-                                        {tradeInstructions}*/}
+                                        {exch1BuyOrSell}<br></br>*/}
                                     </ListGroupItem>
                                 </CSSTransition>
                             ))}

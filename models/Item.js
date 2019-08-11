@@ -5,10 +5,12 @@ const Schema = mongoose.Schema;
 //Create Schema
 const ItemSchema = new Schema(
     {
-        key: String,
+        tradeInstructions: String,       
+        timeStamp: String,       
+        
+     /*   key: String,
         exch1Name: String,
         exch2Name: String,
-        timeStamp: String,
         ccyPair: String,
         exch1BuyAt: String,
         exch1SellAt: String,
@@ -18,8 +20,7 @@ const ItemSchema = new Schema(
         urgentTrade: String,
         arbPercent: String,
         exch1BuyOrSell: String,
-        tradeInstructions: String,
-        time: String
+        time: String*/
     },
     {
         collection: MongoCollection
